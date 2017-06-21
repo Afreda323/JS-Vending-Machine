@@ -1,4 +1,6 @@
-// DOM Elements
+//=============
+//  DOM Elements
+//=============
 const refill = document.getElementById("refill");
 const moneyInput = document.getElementById("money");
 const codeInput = document.getElementById("code");
@@ -9,80 +11,74 @@ const btns = document.getElementsByClassName("code");
 const moneys = document.getElementsByClassName("money");
 const sodaViews = document.getElementsByClassName("soda");
 
-// DOM Event Listeners
-// Code Buttons
+//=============
+//  DOM Listeners
+//=============
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", e => {
-    VendingMachine.enterCode(e.target.value);
+    vendingMachine1.enterCode(e.target.value);
   });
 }
-// Money Buttons
 for (var i = 0; i < moneys.length; i++) {
   moneys[i].addEventListener("click", e => {
-    VendingMachine.takeMoney(e.target.value);
+    vendingMachine1.takeMoney(e.target.value);
   });
 }
 refill.addEventListener("click", () => {
-  VendingMachine.restock();
+  vendingMachine1.restock();
 });
 getChange.addEventListener("click", () => {
-  VendingMachine.dispenseChange();
+  vendingMachine1.dispenseChange();
 });
 dispense.addEventListener("click", () => {
-  VendingMachine.dispenseRequest();
+  vendingMachine1.dispenseRequest();
 });
 clear.addEventListener("click", () => {
-  VendingMachine.clear();
+  vendingMachine1.clear();
 });
-// generate a soda view
+
+//=============
+//  Soda View
+//=============
 const makeSodaTemplate = function(color, price) {
   return `
     <div class="can" style="background-color:${color}"></div>
     <p>$${price}</p>
   `;
 };
-class Soda {
-  constructor(name, price, stock, color, code) {
+
+
+//=============
+//  Machine Class
+//=============
+class VendingMachine {
+  constructor(name) {
+    this.stock = {
+      A: [null, null, null],
+      B: [null, null, null],
+      C: [null, null, null],
+      D: [null, null, null]
+    };
     this.name = name;
-    this.price = price;
-    this.stock = stock;
-    this.color = color;
-    this.code = code;
+    this.money = 0;
+    this.input = "--";
   }
-}
-
-const coke = new Soda("Coke", 1.25, 5, "#ff0000", "B2");
-const sprite = new Soda("Sprite", 1.0, 4, "#03fd2d", "A3");
-const fanta = new Soda("Fanta", 1.5, 3, "#ff9130", "D2");
-const drPepper = new Soda("Dr. Pepper", 2.0, 2, "#cf0012", "C3");
-const gingerAle = new Soda("Ginger Ale", 1.25, 1, "#529850", "B1");
-const water = new Soda("Water", 0.5, 3, "#0000ff", "A1");
-
-const VendingMachine = {
-  stock: {
-    A: [null, null, null],
-    B: [null, null, null],
-    C: [null, null, null],
-    D: [null, null, null]
-  },
-  money: 0,
-  input: "--",
   load() {
-    if (localStorage && localStorage.getItem("sodas")) {
-      this.stock = JSON.parse(localStorage.getItem("sodas"));
+    if (localStorage && localStorage.getItem("sodas" + this.name)) {
+      this.stock = JSON.parse(localStorage.getItem("sodas" + this.name));
     }
     this.set();
-  },
+  }
   save() {
     if (localStorage) {
-      localStorage.setItem("sodas", JSON.stringify(this.stock));
+      localStorage.setItem("sodas" + this.name, JSON.stringify(this.stock));
     }
-  },
+  }
   set() {
     codeInput.innerHTML = this.input;
     moneyInput.innerHTML = this.money.toFixed(2);
     this.renderSodaCans();
-  },
+  }
   renderSodaCans() {
     for (let row in this.stock) {
       this.stock[row].map(soda => {
@@ -96,14 +92,14 @@ const VendingMachine = {
         }
       });
     }
-  },
+  }
   clear() {
     this.input = "--";
     this.set();
-  },
+  }
   restock() {
     this.registerSodas([coke, sprite, drPepper, gingerAle, water, fanta]);
-  },
+  }
   registerSodas(sodas) {
     sodas.map((soda, i) => {
       const str1 = soda.code.toUpperCase().substr(0, 1);
@@ -112,7 +108,7 @@ const VendingMachine = {
     });
     this.set();
     this.save();
-  },
+  }
   enterCode(code) {
     let one = this.input.substr(0, 1);
     let two = this.input.substr(1, 2);
@@ -122,7 +118,7 @@ const VendingMachine = {
       this.input = one + code;
     }
     this.set();
-  },
+  }
   dispenseRequest() {
     let code = this.input;
     const stock = this.stock;
@@ -136,7 +132,7 @@ const VendingMachine = {
     } else {
       this.handleOutOfStock();
     }
-  },
+  }
   compareMoney(sodaPrice) {
     if (this.money === sodaPrice) {
       this.money = 0;
@@ -148,20 +144,20 @@ const VendingMachine = {
       this.insufficientFunds();
       return false;
     }
-  },
+  }
   dispenseChange(sodaPrice) {
     alert("Your change is " + (this.money - sodaPrice).toFixed(2));
     this.money = 0;
     this.set();
-  },
+  }
   insufficientFunds() {
     alert("Please enter more money");
-  },
+  }
   takeMoney(money) {
     money = Number(money);
     this.money += money;
     this.set();
-  },
+  }
   removeSoda(row, index) {
     let select = this.stock[row][index];
     //check if funs are efficient
@@ -182,7 +178,7 @@ const VendingMachine = {
     }
     this.save();
     this.set();
-  },
+  }
   handleOutOfStock() {
     if (this.input === "--") {
       alert("Enter a code");
@@ -190,6 +186,34 @@ const VendingMachine = {
       alert("FUUAAAA, out of stock brah");
     }
   }
-};
+}
 
-VendingMachine.load();
+//=============
+//  Soda Class
+//=============
+class Soda {
+  constructor(name, price, stock, color, code) {
+    this.name = name;
+    this.price = price;
+    this.stock = stock;
+    this.color = color;
+    this.code = code;
+  }
+}
+
+const coke = new Soda("Coke", 1.25, 5, "#ff0000", "B2");
+const sprite = new Soda("Sprite", 1.0, 4, "#03fd2d", "A3");
+const fanta = new Soda("Fanta", 1.5, 3, "#ff9130", "D2");
+const drPepper = new Soda("Dr. Pepper", 2.0, 2, "#cf0012", "C3");
+const gingerAle = new Soda("Ginger Ale", 1.25, 1, "#529850", "B1");
+const water = new Soda("Water", 0.5, 3, "#0000ff", "A1");
+
+
+//=============
+//  Declare Machine that will be on site
+//=============
+const vendingMachine1 = new VendingMachine('vm1');
+//=============
+//  Load existing Local state
+//=============
+vendingMachine1.load();
