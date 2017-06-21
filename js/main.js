@@ -47,7 +47,6 @@ const makeSodaTemplate = function(color, price) {
   `;
 };
 
-
 //=============
 //  Machine Class
 //=============
@@ -146,7 +145,11 @@ class VendingMachine {
     }
   }
   dispenseChange(sodaPrice) {
-    alert("Your change is " + (this.money - sodaPrice).toFixed(2));
+    if (sodaPrice) {
+      alert("Your change is " + (this.money - sodaPrice).toFixed(2));
+    } else {
+      alert("Your change is " + this.money.toFixed(2));
+    }
     this.money = 0;
     this.set();
   }
@@ -208,11 +211,10 @@ const drPepper = new Soda("Dr. Pepper", 2.0, 2, "#cf0012", "C3");
 const gingerAle = new Soda("Ginger Ale", 1.25, 1, "#529850", "B1");
 const water = new Soda("Water", 0.5, 3, "#0000ff", "A1");
 
-
 //=============
 //  Declare Machine that will be on site
 //=============
-const vendingMachine1 = new VendingMachine('vm1');
+const vendingMachine1 = new VendingMachine("vm1");
 //=============
 //  Load existing Local state
 //=============
