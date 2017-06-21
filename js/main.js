@@ -9,11 +9,11 @@ class Soda {
 }
 
 const coke = new Soda("Coke", 1.25, 10, "#ff0000", "B2");
-const sprite = new Soda("Sprite", 1.0, 10, "#ff0000", "A3");
-const fanta = new Soda(26, 1.5, 10, "#ff0000", "D2");
-const drPepper = new Soda("Dr. Pepper", 2.0, 10, "#ff0000", "C3");
-const gingerAle = new Soda("Ginger Ale", 1.25, 10, "#ff0000", "B1");
-const water = new Soda("Water", 0.5, 10, "#ff0000", "A1");
+const sprite = new Soda("Sprite", 1.0, 10, "#03fd2d", "A3");
+const fanta = new Soda('Fanta', 1.5, 10, "#ff9130", "D2");
+const drPepper = new Soda("Dr. Pepper", 2.0, 10, "#cf0012", "C3");
+const gingerAle = new Soda("Ginger Ale", 1.25, 10, "#529850", "B1");
+const water = new Soda("Water", 0.5, 10, "#0000ff", "A1");
 
 const VendingMachine = {
   stock: {
@@ -30,11 +30,7 @@ const VendingMachine = {
   save() {
     localStorage.setItem("sodas", JSON.stringify(this.stock));
   },
-<<<<<<< HEAD
-  registerSodas(sodas) {
-=======
    registerSodas(sodas) {
->>>>>>> origin/master
     sodas.map((soda, i) => {
       const str1 = soda.code.toUpperCase().substr(0, 1);
       const str2 = Number(soda.code.substr(1, 2));
@@ -73,4 +69,4 @@ const VendingMachine = {
 };
 
 VendingMachine.load();
-VendingMachine.takeInput("A3");
+ console.log(VendingMachine.stock)
