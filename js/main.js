@@ -36,7 +36,9 @@ clear.addEventListener("click", () => {
 });
 // generate a soda view
 const makeSodaTemplate = function(color, price) {
-  return `<div class="can" style="background-color:${color}"></div><p>$${price}</p>
+  return `
+    <div class="can" style="background-color:${color}"></div>
+    <p>$${price}</p>
   `;
 };
 class Soda {
@@ -49,12 +51,12 @@ class Soda {
   }
 }
 
-const coke = new Soda("Coke", 1.25, 2, "#ff0000", "B2");
-const sprite = new Soda("Sprite", 1.0, 2, "#03fd2d", "A3");
-const fanta = new Soda("Fanta", 1.5, 10, "#ff9130", "D2");
+const coke = new Soda("Coke", 1.25, 5, "#ff0000", "B2");
+const sprite = new Soda("Sprite", 1.0, 4, "#03fd2d", "A3");
+const fanta = new Soda("Fanta", 1.5, 3, "#ff9130", "D2");
 const drPepper = new Soda("Dr. Pepper", 2.0, 2, "#cf0012", "C3");
-const gingerAle = new Soda("Ginger Ale", 1.25, 2, "#529850", "B1");
-const water = new Soda("Water", 0.5, 2, "#0000ff", "A1");
+const gingerAle = new Soda("Ginger Ale", 1.25, 1, "#529850", "B1");
+const water = new Soda("Water", 0.5, 3, "#0000ff", "A1");
 
 const VendingMachine = {
   stock: {
