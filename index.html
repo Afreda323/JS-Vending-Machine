@@ -9,45 +9,120 @@
 </head>
 
 <body>
-    <h1>Vending Machine</h1>
     <div class='wrap'>
         <div class="vm">
-            <div class="vm-top">
-                <h4>JS VM</h4>
-            </div>
             <div class="vm-middle">
                 <div class="vm-left">
                     <div class="vm-left-inner">
-
+                        <div class="row">
+                            <ul class="column">
+                                <li>
+                                    <span class='soda' id='A1'></span>
+                                    <p>A1</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='A2'></span>
+                                    <p>A2</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='A3'></span>
+                                    <p>A3</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <ul class="column">
+                                <li>
+                                    <span class='soda' id='B1'></span>
+                                    <p>B1</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='B2'></span>
+                                    <p>B2</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='B3'></span>
+                                    <p>B3</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <ul class="column">
+                                <li>
+                                    <span class='soda' id='C1'></span>
+                                    <p>C1</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='C2'></span>
+                                    <p>C2</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='C3'></span>
+                                    <p>C3</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <ul class="column">
+                                <li>
+                                    <span class='soda' id='D1'></span>
+                                    <p>D1</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='D2'></span>
+                                    <p>D2</p>
+                                </li>
+                                <li>
+                                    <span class='soda' id='D3'></span>
+                                    <p>D3</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="vm-right">
-                    <div class="vm-right-screen">
-                        <p id='user-input'>Enter Something</p>
-                    </div>
-                    <div class="vm-right-buttons">
-                        <div class="row">
-                            <button value='A' id='A'>A</button>
-                            <button value='B' id='B'>B</button>
-                            <button value='C' id='C'>C</button>
+                    <div class="vm-right-inner">
+                        <div class="vm-right-screen">
+                            <p id='money'>0.00</p>
+                            <p id='code'>--</p>
                         </div>
-                        <div class="row">
-                            <button value='1' id='1'>1</button>
-                            <button value='2' id='2'>2</button>
-                            <button value='3' id='3'>3</button>
+                        <div class="vm-right-buttons">
+                            <div class="row">
+                                <button class='code' value='A' id='A'>A</button>
+                                <button class='code' value='B' id='B'>B</button>
+                                <button class='code' value='C' id='C'>C</button>
+                            </div>
+                            <div class="row">
+                                <button class='code' value='1' id='1'>1</button>
+                                <button class='code' value='2' id='2'>2</button>
+                                <button class='code' value='3' id='3'>3</button>
+                            </div>
+                            <button id='dispense'>
+                              Dispense
+                            </button>
+                            <button id='clear'>
+                              Clear
+                            </button>
+                            <br />
+                            <button id='get-change'>
+                              Get Change
+                            </button>
                         </div>
                     </div>
-                    <button id='get-change'>
-                        Get Change
-                    </button>
                 </div>
             </div>
             <div class="vm-bottom">
-                <div id='serve'>
-
-                </div>
             </div>
         </div>
+    </div>
+    <div class="moneys">
+        <button class="money" value='.05'>Add Nickel</button>
+        <button class="money" value='.1'>Add Dime</button>
+        <button class="money" value='.25'>Add Quarter</button>
+        <button class="money" value='1'>Add Dollar</button>
+    </div>
+    <div style='text-align: center'>
+        <button id='refill'>Restock Machine</button>
     </div>
     <script src='js/main.js'></script>
 </body>
