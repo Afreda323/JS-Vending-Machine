@@ -30,7 +30,11 @@ const VendingMachine = {
   save() {
     localStorage.setItem("sodas", JSON.stringify(this.stock));
   },
+<<<<<<< HEAD
   registerSodas(sodas) {
+=======
+   registerSodas(sodas) {
+>>>>>>> origin/master
     sodas.map((soda, i) => {
       const str1 = soda.code.toUpperCase().substr(0, 1);
       const str2 = Number(soda.code.substr(1, 2));
